@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewLendingTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewLendingLabel_idlending}"/>
+                    <h:outputText value="#{lendingController.selected.idlending}" title="#{bundle.ViewLendingTitle_idlending}"/>
+                    <h:outputText value="#{bundle.ViewLendingLabel_amount}"/>
+                    <h:outputText value="#{lendingController.selected.amount}" title="#{bundle.ViewLendingTitle_amount}"/>
+                    <h:outputText value="#{bundle.ViewLendingLabel_datelent}"/>
+                    <h:outputText value="#{lendingController.selected.datelent}" title="#{bundle.ViewLendingTitle_datelent}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewLendingLabel_currentbalance}"/>
+                    <h:outputText value="#{lendingController.selected.currentbalance}" title="#{bundle.ViewLendingTitle_currentbalance}"/>
+                    <h:outputText value="#{bundle.ViewLendingLabel_lender}"/>
+                    <h:outputText value="#{lendingController.selected.lender}" title="#{bundle.ViewLendingTitle_lender}"/>
+                    <h:outputText value="#{bundle.ViewLendingLabel_borrower}"/>
+                    <h:outputText value="#{lendingController.selected.borrower}" title="#{bundle.ViewLendingTitle_borrower}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{lendingController.destroyAndView}" value="#{bundle.ViewLendingDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewLendingEditLink}"/>
+                <br />
+                <h:commandLink action="#{lendingController.prepareCreate}" value="#{bundle.ViewLendingCreateLink}" />
+                <br />
+                <h:commandLink action="#{lendingController.prepareList}" value="#{bundle.ViewLendingShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewLendingIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

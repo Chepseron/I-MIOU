@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListLendingTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListLendingEmpty}" rendered="#{lendingController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{lendingController.items.rowCount > 0}">
+                    <h:outputText value="#{lendingController.pagination.pageFirstItem + 1}..#{lendingController.pagination.pageLastItem + 1}/#{lendingController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{lendingController.previous}" value="#{bundle.Previous} #{lendingController.pagination.pageSize}" rendered="#{lendingController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{lendingController.next}" value="#{bundle.Next} #{lendingController.pagination.pageSize}" rendered="#{lendingController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{lendingController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLendingTitle_idlending}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idlending}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLendingTitle_amount}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.amount}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLendingTitle_datelent}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datelent}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLendingTitle_currentbalance}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.currentbalance}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLendingTitle_lender}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lender}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLendingTitle_borrower}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.borrower}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{lendingController.prepareView}" value="#{bundle.ListLendingViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{lendingController.prepareEdit}" value="#{bundle.ListLendingEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{lendingController.destroy}" value="#{bundle.ListLendingDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{lendingController.prepareCreate}" value="#{bundle.ListLendingCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListLendingIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

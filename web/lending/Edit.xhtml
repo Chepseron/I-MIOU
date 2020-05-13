@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditLendingTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditLendingLabel_idlending}" for="idlending" />
+                    <h:inputText id="idlending" value="#{lendingController.selected.idlending}" title="#{bundle.EditLendingTitle_idlending}" required="true" requiredMessage="#{bundle.EditLendingRequiredMessage_idlending}"/>
+                    <h:outputLabel value="#{bundle.EditLendingLabel_amount}" for="amount" />
+                    <h:inputText id="amount" value="#{lendingController.selected.amount}" title="#{bundle.EditLendingTitle_amount}" required="true" requiredMessage="#{bundle.EditLendingRequiredMessage_amount}"/>
+                    <h:outputLabel value="#{bundle.EditLendingLabel_datelent}" for="datelent" />
+                    <h:inputText id="datelent" value="#{lendingController.selected.datelent}" title="#{bundle.EditLendingTitle_datelent}" required="true" requiredMessage="#{bundle.EditLendingRequiredMessage_datelent}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditLendingLabel_currentbalance}" for="currentbalance" />
+                    <h:inputText id="currentbalance" value="#{lendingController.selected.currentbalance}" title="#{bundle.EditLendingTitle_currentbalance}" required="true" requiredMessage="#{bundle.EditLendingRequiredMessage_currentbalance}"/>
+                    <h:outputLabel value="#{bundle.EditLendingLabel_lender}" for="lender" />
+                    <h:selectOneMenu id="lender" value="#{lendingController.selected.lender}" title="#{bundle.EditLendingTitle_lender}" required="true" requiredMessage="#{bundle.EditLendingRequiredMessage_lender}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditLendingLabel_borrower}" for="borrower" />
+                    <h:selectOneMenu id="borrower" value="#{lendingController.selected.borrower}" title="#{bundle.EditLendingTitle_borrower}" required="true" requiredMessage="#{bundle.EditLendingRequiredMessage_borrower}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{lendingController.update}" value="#{bundle.EditLendingSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditLendingViewLink}"/>
+                <br />
+                <h:commandLink action="#{lendingController.prepareList}" value="#{bundle.EditLendingShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditLendingIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
